@@ -1,0 +1,204 @@
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Space Mono", monospace;
+}
+
+html,
+body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+body {
+  display: grid;
+  place-items: center;
+  grid-template-rows: 0.5fr 1fr;
+  background-color: hsl(185, 41%, 84%);
+  color: hsl(183, 100%, 15%);
+}
+
+/* input number tag */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+  padding: 0.5em;
+  text-align: right;
+  background-color: hsl(185, 41%, 84%);
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  color: hsl(183, 100%, 15%);
+  font-size: larger;
+
+  &::placeholder {
+    color: hsl(183, 100%, 15%);
+  }
+}
+/* ----------------- */
+
+li {
+  list-style-type: none;
+}
+
+h1 {
+  text-align: center;
+  letter-spacing: 0.5ch;
+  font-size: 1.5em;
+}
+
+body > main {
+  display: flex;
+  align-self: self-start;
+  width: clamp(500px, 60vw, 900px);
+  background-color: #fff;
+  border-radius: 1em;
+  gap: 2em;
+  padding: 2em;
+}
+
+main > div.calculSide {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2em;
+  font-weight: 700;
+  width: 100%;
+  max-width: 350px;
+
+  & > div.bills {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    & > p {
+      font-size: 0.9em;
+    }
+
+    &::after {
+      position: absolute;
+      bottom: 0;
+      content: "";
+      width: 45px;
+      height: 45px;
+      background-image: url(./images/icon-dollar.svg);
+      background-size: 30%;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  }
+
+  & > div.tips {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    & > ol {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 1fr 1fr;
+      gap: 10px;
+
+      & > li {
+        width: 100%;
+        height: 100%;
+        & > * {
+          font-size: 1.25em;
+        }
+
+        & > input {
+          padding: 0.5em;
+          font-weight: bolder;
+        }
+
+        & > button {
+          width: 100%;
+          height: 100%;
+          font-weight: bolder;
+          color: white;
+          background-color: hsl(183, 100%, 15%);
+          border: none;
+          border-radius: 3px;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+
+  & > div.numberPeople {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    & > label {
+      position: absolute;
+      top: 5px;
+      right: 0;
+      font-size: 0.8em;
+      color: rgba(255, 0, 0, 0.7);
+    }
+
+    &::after {
+      position: absolute;
+      bottom: 0;
+      content: "";
+      width: 45px;
+      height: 45px;
+      background-image: url(./images/icon-person.svg);
+      background-size: 30%;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  }
+}
+main > aside {
+  display: grid;
+  align-items: end;
+  grid-template-rows: auto auto 1fr;
+  gap: 2em;
+  background-color: hsl(183, 100%, 15%);
+  padding: 2em;
+  border-radius: 1em;
+  width: 100%;
+  color: white;
+
+  & > button {
+    width: 100%;
+    height: fit-content;
+    justify-self: center;
+
+    &.active {
+      background-color: hsl(185, 41%, 84%);
+    }
+  }
+
+  & > div {
+    display: grid;
+    align-items: center;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+
+    & > span {
+      grid-area: 1 / 2 / 3 / 3;
+      justify-self: end;
+      font-size: 2.5em;
+      color: hsl(183, 92%, 35%);
+      font-weight: 700;
+    }
+
+    & > sub {
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+}
