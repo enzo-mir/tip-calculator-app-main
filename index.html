@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
+
+    <title>Frontend Mentor | Tip calculator app</title>
+  </head>
+  <body>
+    <h1>SPLI<br />TTER</h1>
+
+    <main>
+      <div class="calculSide">
+        <div class="bills">
+          <p>Bill</p>
+          <input type="number" name="bill" placeholder="0" />
+        </div>
+
+        <div class="tips">
+          <p>Select Tip %</p>
+          <ol class="tipsContainer">
+            <li><button>5%</button></li>
+            <li><button>10%</button></li>
+            <li><button>15%</button></li>
+            <li><button>25%</button></li>
+            <li><button>50%</button></li>
+            <li><input type="number" placeholder="Custom" max="100" /></li>
+          </ol>
+        </div>
+
+        <div class="numberPeople">
+          <p>Number of People</p>
+          <label for="peoples">Can't be 0</label>
+          <input type="number" placeholder="0" name="peoples" min="1" />
+        </div>
+      </div>
+
+      <aside>
+        <div class="tipsAmountCont">
+          <p>Tip Amount</p>
+          <sub>/ person</sub>
+          <span id="tipAmount">$0.00</span>
+        </div>
+        <div class="totalCont">
+          <p>Total</p>
+          <sub>/ person</sub>
+          <span id="total">$0.00</span>
+        </div>
+
+        <button>Reset</button>
+      </aside>
+    </main>
+  </body>
+</html>
