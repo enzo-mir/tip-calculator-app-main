@@ -79,6 +79,30 @@ main > div.calculSide {
     flex-direction: column;
     gap: 5px;
 
+    &:has(input.error) {
+      & > input {
+        outline: 1px solid rgba(255, 0, 0, 0.7);
+      }
+
+      & > label {
+        display: block;
+      }
+    }
+    &:has(input:not(.error)) {
+      & > input {
+        outline: 1px solid hsl(183, 63%, 59%);
+      }
+    }
+
+    & > label {
+      display: none;
+      position: absolute;
+      top: 5px;
+      right: 0;
+      font-size: 0.8em;
+      color: rgba(255, 0, 0, 0.7);
+    }
+
     & > input {
       color: hsl(183, 100%, 15%);
       font-weight: bold;
@@ -164,6 +188,15 @@ main > div.calculSide {
     &:has(input.error) {
       & > label {
         display: block;
+      }
+
+      & > input {
+        outline: 1px solid rgba(255, 0, 0, 0.7);
+      }
+    }
+    &:has(input:not(.error)) {
+      & > input {
+        outline: 1px solid hsl(183, 63%, 59%);
       }
     }
 

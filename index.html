@@ -17,6 +17,7 @@
       <div class="calculSide">
         <div class="bills">
           <p>Bill</p>
+          <label for="peoples">Can't be 0</label>
           <input type="number" name="bill" placeholder="0" />
         </div>
 
@@ -111,7 +112,8 @@
       function handleSubmit() {
         if (values.people !== null && values.people !== 0) {
           people.classList.contains("error") ? people.classList.remove("error") : null;
-          if (values.bill !== null) {
+          if (values.bill !== null && parseInt(values.bill) > 0) {
+            bill.classList.contains("error") ? bill.classList.remove("error") : null;
             if (values.tips !== null && values.tips < 100) {
               let tipsAmountCalc = (values.bill / values.people) * (values.tips / 100);
               tipsAmount.innerHTML = `$${tipsAmountCalc.toFixed(2)}`;
@@ -122,6 +124,7 @@
               total.innerHTML = "$0.00";
             }
           } else {
+            bill.classList.add("error");
             tipsAmount.innerHTML = "$0.00";
             total.innerHTML = "$0.00";
           }
@@ -130,6 +133,7 @@
           tipsAmount.innerHTML = "$0.00";
           total.innerHTML = "$0.00";
         }
+
         if (!values.bill && !values.tips && !values.people) {
           resetButton.classList.add("empty");
         } else {
