@@ -51,7 +51,7 @@
           <span id="total">$0.00</span>
         </div>
 
-        <button id="resetBtn">Reset</button>
+        <button id="resetBtn" class="empty">Reset</button>
       </aside>
     </main>
     <script>
@@ -69,18 +69,22 @@
         tips: null,
       };
 
-      resetButton.addEventListener("click", () => {
-        values = {
-          bill: null,
-          people: null,
-          tips: null,
-        };
-        bill.value = "";
-        people.value = "";
-        customTips.value = "";
-        document.querySelector("button.active")?.classList.remove("active");
+      resetButton.addEventListener("click", (e) => {
+        if (!values.bill && !values.tips && !values.people) {
+          e.preventDefault();
+        } else {
+          values = {
+            bill: null,
+            people: null,
+            tips: null,
+          };
+          bill.value = "";
+          people.value = "";
+          customTips.value = "";
+          document.querySelector("button.active")?.classList.remove("active");
 
-        handleSubmit();
+          handleSubmit();
+        }
       });
 
       function handleChangeBill(e) {
@@ -125,6 +129,11 @@
           people.classList.add("error");
           tipsAmount.innerHTML = "$0.00";
           total.innerHTML = "$0.00";
+        }
+        if (!values.bill && !values.tips && !values.people) {
+          resetButton.classList.add("empty");
+        } else {
+          resetButton.classList.contains("empty") ? resetButton.classList.remove("empty") : null;
         }
       }
 
