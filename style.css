@@ -127,6 +127,11 @@ main > div.calculSide {
           border: none;
           border-radius: 3px;
 
+          &.active {
+            background-color: hsl(183, 92%, 35%);
+            color: hsl(183, 100%, 15%);
+          }
+
           &:hover {
             cursor: pointer;
           }
@@ -141,7 +146,14 @@ main > div.calculSide {
     flex-direction: column;
     gap: 5px;
 
+    &:has(input.error) {
+      & > label {
+        display: block;
+      }
+    }
+
     & > label {
+      display: none;
       position: absolute;
       top: 5px;
       right: 0;

@@ -28,7 +28,7 @@
             <li><button>15%</button></li>
             <li><button>25%</button></li>
             <li><button>50%</button></li>
-            <li><input type="number" placeholder="Custom" max="100" /></li>
+            <li><input type="number" placeholder="Custom" max="100" id="customTips" /></li>
           </ol>
         </div>
 
@@ -51,8 +51,90 @@
           <span id="total">$0.00</span>
         </div>
 
-        <button>Reset</button>
+        <button id="resetBtn">Reset</button>
       </aside>
     </main>
+    <script>
+      const allButtonTips = document.querySelectorAll("ol.tipsContainer > li > button");
+      const customTips = document.getElementById("customTips");
+      const resetButton = document.getElementById("resetBtn");
+      const bill = document.querySelector("div.bills > input");
+      const people = document.querySelector("div.numberPeople > input");
+      const tipsAmount = document.getElementById("tipAmount");
+      const total = document.getElementById("total");
+
+      var values = {
+        bill: null,
+        people: null,
+        tips: null,
+      };
+
+      resetButton.addEventListener("click", () => {
+        values = {
+          bill: null,
+          people: null,
+          tips: null,
+        };
+        bill.value = "";
+        people.value = "";
+        customTips.value = "";
+        document.querySelector("button.active")?.classList.remove("active");
+
+        handleSubmit();
+      });
+
+      function handleChangeBill(e) {
+        const value = e.target.value;
+        !value ? (values.bill = null) : (values.bill = parseFloat(value));
+        handleSubmit();
+      }
+      function handleChangeTip(e, type) {
+        document.querySelector("button.active")?.classList.remove("active");
+        if (type === "button") {
+          e.target.classList.add("active");
+        }
+
+        const value = type === "button" ? e.target.innerText.replace("%", "") : e.target.value;
+        !value ? (values.tips = null) : (values.tips = parseFloat(value));
+        handleSubmit();
+      }
+      function handleChangePeople(e) {
+        const value = parseFloat(e.target.value);
+        !value ? (values.people = null) : (values.people = value);
+        handleSubmit();
+      }
+
+      function handleSubmit() {
+        if (values.people !== null && values.people !== 0) {
+          people.classList.contains("error") ? people.classList.remove("error") : null;
+          if (values.bill !== null) {
+            if (values.tips !== null && values.tips < 100) {
+              let tipsAmountCalc = (values.bill / values.people) * (values.tips / 100);
+              tipsAmount.innerHTML = `$${tipsAmountCalc.toFixed(2)}`;
+              total.innerHTML = `$${(values.bill / values.people + tipsAmountCalc).toFixed(2)}`;
+            } else {
+              customTips.classList.add("error");
+              tipsAmount.innerHTML = "$0.00";
+              total.innerHTML = "$0.00";
+            }
+          } else {
+            tipsAmount.innerHTML = "$0.00";
+            total.innerHTML = "$0.00";
+          }
+        } else {
+          people.classList.add("error");
+          tipsAmount.innerHTML = "$0.00";
+          total.innerHTML = "$0.00";
+        }
+      }
+
+      allButtonTips.forEach((button) => {
+        button.addEventListener("click", (e) => handleChangeTip(e, "button"));
+      });
+      customTips.addEventListener("input", (e) => handleChangeTip(e, "input"));
+
+      bill.addEventListener("input", handleChangeBill);
+      people.addEventListener("input", handleChangePeople);
+    </script>
   </body>
 </html>
